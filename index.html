@@ -10,80 +10,90 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
             integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
             crossorigin="anonymous" />
-        <link rel="stylesheet" href="./assets/stylesheets/bootstrap-setting.css" </head>
+        <link rel="stylesheet" href="./assets/stylesheets/bootstrap-setting.css" />
+        <link rel="stylesheet" href="./assets//stylesheets/main-style.css" />
+    </head>
 
     <body>
         <!-- Navbar Section -->
-        <nav class='navbar navbar-expand-lg navbar-light d-flex justify-content-between bg-primary'>
-            <p class='navbar-brand text-white'>Weather Dashboard</p>
-            <form class='form-inline nav-item dropdown'>
-                <!-- Form Inputs -->
-                <input class='form-control nav-link dropdown-toggle' type='text' placeholder='Search'
-                    data-toggle='dropdown' />
-                <button class='btn text-white' type='submit'>Search</button>
-                <!-- Dropdown History -->
-                <ul class='dropdown-menu'>
-                    <li class='dropdown-item'>City 1</li>
-                    <li class='dropdown-item'>City 2</li>
-                    <li class='dropdown-item'>City 3</li>
-                </ul>
+        <nav class='navbar d-flex justify-content-between bg-primary'>
+            <h3 class='navbar-brand text-white'>Weather Dashboard</h3>
+
+            <!-- Search Bar -->
+            <form class='nav-item dropdown'>
+                <div class='input-group'>
+                    <input class='form-control nav-link dropdown-toggle' type='text' placeholder='City Name'
+                        data-toggle='dropdown' />
+                    <div class='input-group-append'>
+                        <button class='input-group-text bg-light'>
+                            <!-- Search Icon SVG -->
+                            <svg width="1em" height="1em" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z" />
+                                <path fill-rule="evenodd"
+                                    d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Dropdown History -->
+                    <ul class='dropdown-menu'>
+                        <li class='dropdown-item'>City 1</li>
+                        <li class='dropdown-item'>City 2</li>
+                        <li class='dropdown-item'>City 3</li>
+                    </ul>
+                </div>
             </form>
         </nav>
 
         <!-- Weather Section -->
         <article class='container'>
+
             <!-- Weather Info Section -->
             <section class='mt-2 mb-2'>
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>Date</h5>
-                        <p class='card-text'>Hello World</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Austin, TX 08/22/2020</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
+                    <p class='card-text'>Wind Speed: 120 mph</p>
+                    <p class='card-text'>UV Index: idk 5</p>
                 </div>
             </section>
+
             <!-- 5 Day Forecast Section -->
             <section class='d-flex justify-content-between'>
                 <!-- Forecast Day -->
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>DAY</h5>
-                        <p class='card-text'>Putting in a lot of content here to see how it is handled by the flexbox
-                            container. Can't wait to see what happens!</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Day</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
                 </div>
                 <!-- Forecast Day -->
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>DAY</h5>
-                        <p class='card-text'>Putting in a lot of content here to see how it is handled by the flexbox
-                            container. Can't wait to see what happens!</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Day</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
                 </div>
                 <!-- Forecast Day -->
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>DAY</h5>
-                        <p class='card-text'>Putting in a lot of content here to see how it is handled by the flexbox
-                            container. Can't wait to see what happens!</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Day</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
                 </div>
                 <!-- Forecast Day -->
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>DAY</h5>
-                        <p class='card-text'>Putting in a lot of content here to see how it is handled by the flexbox
-                            container. Can't wait to see what happens!</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Day</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
                 </div>
                 <!-- Forecast Day -->
-                <div class='card mx-2'>
-                    <div class='card-body'>
-                        <h5 class='card-title'>DAY</h5>
-                        <p class='card-text'>Putting in a lot of content here to see how it is handled by the flexbox
-                            container. Can't wait to see what happens!</p>
-                    </div>
+                <div class='card card-body mx-2'>
+                    <h5 class='card-title'>Day</h5>
+                    <p class='card-text'>Temperature: 90F</p>
+                    <p class='card-text'>Humidity: 50%</p>
                 </div>
             </section>
+
         </article>
 
         <!-- jQuery for Bootstrap -->

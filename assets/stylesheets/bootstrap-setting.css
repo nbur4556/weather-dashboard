@@ -1,3 +1,12 @@
 .container{
     max-width: 90vw;
 }
+
+.dropdown-menu{
+    /* Positioned for sidebar underneath navbar on right side of screen */
+    width: 300px;
+    height: 100vh;
+    top: 49px;
+
+    border-radius: 0;
+}

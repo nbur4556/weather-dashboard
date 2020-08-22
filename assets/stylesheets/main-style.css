@@ -1,0 +1,4 @@
+body{
+    /* Hide overflow from search history */
+    overflow: hidden;
+}
