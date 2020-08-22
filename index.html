@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Dashboard</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+            crossorigin="anonymous" />
+    </head>
+
+    <body>
+        <!-- Navbar Section -->
+        <nav class='navbar navbar-expand-lg navbar-light d-flex justify-content-between bg-primary'>
+            <p class='navbar-brand text-white'>Weather Dashboard</p>
+            <form class='form-inline nav-item dropdown'>
+                <!-- Form Inputs -->
+                <input class='form-control nav-link dropdown-toggle' type='text' placeholder='Search'
+                    data-toggle='dropdown' />
+                <button class='btn text-white' type='submit'>Search</button>
+                <!-- Dropdown History -->
+                <ul class='dropdown-menu'>
+                    <li class='dropdown-item'>City 1</li>
+                    <li class='dropdown-item'>City 2</li>
+                    <li class='dropdown-item'>City 3</li>
+                </ul>
+            </form>
+        </nav>
+
+        <!-- Weather Section -->
+        <article>
+            <section>Weather Info</section>
+            <section>5 Day Forecast</section>
+        </article>
+
+        <!-- jQuery for Bootstrap -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+            integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+            crossorigin="anonymous"></script>
+    </body>
+
+</html>
