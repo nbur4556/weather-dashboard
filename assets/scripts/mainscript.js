@@ -10,7 +10,10 @@ $(document).ready(function () {
     }).then(function (response) {
         console.log(response);
 
-        console.log(getIconUrl('11d'));
+        console.log(getIconUrl('11d', 'small'));
+        console.log(getIconUrl('11d', 'mid'));
+        console.log(getIconUrl('11d', 'large'));
+        console.log(getIconUrl('11d', 'big'));
         console.log(getIconUrl(response.weather[0].icon));
     });
 
@@ -27,16 +30,24 @@ $(document).ready(function () {
         50d || 50n == 'Mist'
     */
     function getIconUrl(iconId, size = 'small') {
+        const sizeOption = ['small', 'mid', 'large'];
         let iconUrl = '';
 
-        if (size == 'small') {
-            iconUrl = (`http://openweathermap.org/img/wn/${iconId}@2x.png`)
+        if (size == sizeOption[0]) {
+            iconUrl = (`http://openweathermap.org/img/wn/${iconId}.png`);
+        }
+        else if (size == sizeOption[1]) {
+            iconUrl = (`http://openweathermap.org/img/wn/${iconId}@2x.png`);
+        }
+        else if (size == sizeOption[2]) {
+            iconUrl = (`http://openweathermap.org/img/wn/${iconId}@4x.png`);
         }
         else {
-            iconUrl = (`http://openweathermap.org/img/wn/${iconId}@4x.png`)
+            console.error(`${size} size is not supported. Supported sizes include {'${sizeOption[0]}', '${sizeOption[1]}', '${sizeOption[2]}'}`);
+            iconUrl = (`http://openweathermap.org/img/wn/${iconId}.png`);
         }
 
-        return iconUrl
+        return iconUrl;
     }
 
 });
