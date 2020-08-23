@@ -4,17 +4,14 @@ $(document).ready(function () {
     let cityName = 'Dallas';
     let apiURL = (`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherKey}`);
 
+    displayDates();
+
+    //AJAX call Open Weather API
     $.ajax({
         url: apiURL,
         method: 'GET'
     }).then(function (response) {
         console.log(response);
-
-        console.log(getIconUrl('11d', 'small'));
-        console.log(getIconUrl('11d', 'mid'));
-        console.log(getIconUrl('11d', 'large'));
-        console.log(getIconUrl('11d', 'big'));
-        console.log(getIconUrl(response.weather[0].icon));
     });
 
     //Get icon from open weather maps icon url
@@ -43,11 +40,27 @@ $(document).ready(function () {
             iconUrl = (`http://openweathermap.org/img/wn/${iconId}@4x.png`);
         }
         else {
+            //If size is not found, set to size small and give error
             console.error(`${size} size is not supported. Supported sizes include {'${sizeOption[0]}', '${sizeOption[1]}', '${sizeOption[2]}'}`);
             iconUrl = (`http://openweathermap.org/img/wn/${iconId}.png`);
         }
 
         return iconUrl;
+    }
+
+    //Display dates and days of the week for Weather Info and 5 Day Forecast sections
+    function displayDates() {
+        const m = moment();
+        const forecastDOWs = $('.forecast-dow');
+
+        //Set current date in Weather Info section
+        $('#current-date').text(m.format("MM/DD/YYYY"));
+
+        //Set days of the week for 5 Day Forecast section
+        for (let i = 0; i < 5; i++) {
+            m.add(1, 'days');
+            forecastDOWs.eq(i).text(m.format('dddd'));
+        }
     }
 
 });
