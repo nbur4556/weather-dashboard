@@ -1,18 +1,29 @@
 $(document).ready(function () {
     //Open Weather API Variables
     const openWeatherKey = 'd4e1e14217e539534a82f3014cd52789';
-    let cityName = 'Salt Lake City';
-    let apiURL = (`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherKey}`);
+    let cityName = 'Austin';
 
     displayDates();
 
-    //AJAX call Open Weather API
+    //AJAX call Weather Info API
+    let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherKey}`;
     $.ajax({
-        url: apiURL,
+        url: weatherURL,
         method: 'GET'
     }).then(function (response) {
+        console.log('weather response');
         console.log(response);
-        displayWeatherInfo(response, false);
+        displayWeatherInfo(response, true);
+    });
+
+    //AJAX call 5 Day Forecast API
+    let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${openWeatherKey}`;
+    $.ajax({
+        url: forecastURL,
+        method: 'GET'
+    }).then(function (response) {
+        console.log('forecast response');
+        console.log(response);
     });
 
     //Get icon from open weather maps icon url
@@ -51,6 +62,7 @@ $(document).ready(function () {
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
+        let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
         //Convert temperature to Fahrenheit or Celcius
         if (useFahrenheit) {
             temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
@@ -66,10 +78,16 @@ $(document).ready(function () {
         //Weather Info
         $('#temperature').text(temperature);
         $('#humidity').text(`${weatherInfo.main.humidity}%`);
-        $('#wind-speed').text(`${weatherInfo.wind.speed} mph`);
+        $('#wind-speed').text(`${windSpeed} mph`);
 
         //Weather Info Icon
         $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
+
+        //AJAX call UV Index API
+        let uvIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${openWeatherKey}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
+        $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
+            $('#uv-index').text(response.value);
+        });
     }
 
     //Display dates and days of the week for Weather Info and 5 Day Forecast sections
