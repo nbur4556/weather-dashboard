@@ -1,13 +1,12 @@
 $(document).ready(function () {
     //Open Weather API Variables
-    const openWeatherKey = 'd4e1e14217e539534a82f3014cd52789';
     const apiURL = 'https://api.openweathermap.org/data/2.5/';
     let cityName = 'Austin';
 
     displayDates();
 
     //AJAX call Weather Info API
-    const weatherURL = `${apiURL}weather?q=${cityName}&appid=${openWeatherKey}`;
+    const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
     $.ajax({
         url: weatherURL,
         method: 'GET'
@@ -16,7 +15,7 @@ $(document).ready(function () {
     });
 
     //AJAX call 5 Day Forecast API
-    const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${openWeatherKey}`;
+    const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${config.KEY}`;
     $.ajax({
         url: forecastURL,
         method: 'GET'
@@ -48,7 +47,7 @@ $(document).ready(function () {
         $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
 
         //AJAX call UV Index API
-        const uvIndexURL = `${apiURL}uvi?appid=${openWeatherKey}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
+        const uvIndexURL = `${apiURL}uvi?appid=${config.KEY}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
             $('#uv-index').text(response.value);
         });
