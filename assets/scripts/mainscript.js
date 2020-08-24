@@ -12,7 +12,7 @@ $(document).ready(function () {
         method: 'GET'
     }).then(function (response) {
         console.log(response);
-        displayWeatherInfo(response);
+        displayWeatherInfo(response, false);
     });
 
     //Get icon from open weather maps icon url
@@ -49,15 +49,24 @@ $(document).ready(function () {
         return iconUrl;
     }
 
-    function displayWeatherInfo(weatherInfo) {
+    function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
+        let temperature;
+        //Convert temperature to Fahrenheit or Celcius
+        if (useFahrenheit) {
+            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
+        }
+        else {
+            temperature = `${kelvinToCelsius(weatherInfo.main.temp)} C`;
+        }
+
         //Location Info
         $('#city-name').text(weatherInfo.name);
         $('#country-code').text(weatherInfo.sys.country);
 
         //Weather Info
-        $('#temperature').text(weatherInfo.main.temp);
-        $('#humidity').text(weatherInfo.main.humidity);
-        $('#wind-speed').text(weatherInfo.wind.speed);
+        $('#temperature').text(temperature);
+        $('#humidity').text(`${weatherInfo.main.humidity}%`);
+        $('#wind-speed').text(`${weatherInfo.wind.speed} mph`);
 
         //Weather Info Icon
         $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
@@ -78,4 +87,15 @@ $(document).ready(function () {
         }
     }
 
+    //Converts Kelvin input to Fahrenheit output
+    function kelvinToFahrenheit(kel) {
+        let far = ((kel - 273.15) * (9 / 5) + 32);
+        return Math.floor(far);
+    }
+
+    //Converts Kelvin input to Celsius output
+    function kelvinToCelsius(kel) {
+        let cel = (kel - 273.15);
+        return Math.floor(cel);
+    }
 });
