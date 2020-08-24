@@ -26,6 +26,8 @@
                 <div class='input-group'>
                     <input class='form-control nav-link dropdown-toggle' type='text' placeholder='City Name'
                         data-toggle='dropdown' />
+
+                    <!-- Search Icon -->
                     <div class='input-group-append'>
                         <button class='input-group-text bg-light'>
                             <!-- Search Icon SVG -->
@@ -44,6 +46,7 @@
                         <li class='dropdown-item'>City 2</li>
                         <li class='dropdown-item'>City 3</li>
                     </ul>
+
                 </div>
             </form>
         </nav>
@@ -54,67 +57,74 @@
             <!-- Weather Info Section -->
             <section class='mt-2 mb-2'>
                 <div class='card card-body mx-2'>
-                    <div class='row'>
-                        <div class='col-md-8'>
-                            <h5 class='card-title mb-4'>Austin, TX <span id='current-date'></span></h5>
 
-                            <div class='row'>
+                    <!-- Title and Icon Section -->
+                    <div class='row'>
+                        <div class='col-md-6'>
+                            <h5 class='card-title mb-5'>
+                                <span id='city-name'></span>, <span id='country-code'></span>
+                                <span id='current-date'></span>
+                            </h5>
+
+                            <!-- Information Section -->
+                            <section class='row'>
                                 <div class='col-md-6'>
-                                    <p class='card-text'>Temperature: 90F</p>
-                                    <p class='card-text'>Humidity: 50%</p>
+                                    <p class='card-text'>Temperature: <span id='temperature'></span></p>
+                                    <p class='card-text'>Humidity: <span id='humidity'></span></p>
                                 </div>
                                 <div class='col-md-6'>
-                                    <p class='card-text'>Wind Speed: 120 mph</p>
-                                    <p class='card-text'>UV Index: idk 5</p>
+                                    <p class='card-text'>Wind Speed: <span id='wind-speed'></span></p>
+                                    <p class='card-text'>UV Index: <span id='uv-index'></span></p>
                                 </div>
-                            </div>
+                            </section>
 
                         </div>
                         <!-- Weather Icon Image -->
                         <div class='col-md-2'>
-                            <img class='card-img' src='http://openweathermap.org/img/wn/02d@2x.png' />
+                            <img id='weather-info-icon' src='http://openweathermap.org/img/wn/02d@4x.png' />
                         </div>
                     </div>
+
                 </div>
             </section>
 
             <!-- 5 Day Forecast Section -->
             <section class='d-flex justify-content-between'>
                 <!-- Forecast Day -->
-                <div class='card card-body mx-2'>
+                <section class='card card-body mx-2'>
                     <h5 class='forecast-dow card-title'></h5>
                     <img class='card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
                     <p class='card-text'>Temperature: 90F</p>
                     <p class='card-text'>Humidity: 50%</p>
-                </div>
+                </section>
                 <!-- Forecast Day -->
-                <div class='card card-body mx-2'>
+                <section class='card card-body mx-2'>
                     <h5 class='forecast-dow card-title'></h5>
                     <img class='card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
                     <p class='card-text'>Temperature: 90F</p>
                     <p class='card-text'>Humidity: 50%</p>
-                </div>
+                </section>
                 <!-- Forecast Day -->
-                <div class='card card-body mx-2'>
+                <section class='card card-body mx-2'>
                     <h5 class='forecast-dow card-title'></h5>
                     <img class='card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
                     <p class='card-text'>Temperature: 90F</p>
                     <p class='card-text'>Humidity: 50%</p>
-                </div>
+                </section>
                 <!-- Forecast Day -->
-                <div class='card card-body mx-2'>
+                <section class='card card-body mx-2'>
                     <h5 class='forecast-dow card-title'></h5>
                     <img class='card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
                     <p class='card-text'>Temperature: 90F</p>
                     <p class='card-text'>Humidity: 50%</p>
-                </div>
+                </section>
                 <!-- Forecast Day -->
-                <div class='card card-body mx-2'>
+                <section class='card card-body mx-2'>
                     <h5 class='forecast-dow card-title'></h5>
                     <img class='card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
                     <p class='card-text'>Temperature: 90F</p>
                     <p class='card-text'>Humidity: 50%</p>
-                </div>
+                </section>
             </section>
 
         </article>

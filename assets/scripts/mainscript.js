@@ -1,7 +1,7 @@
 $(document).ready(function () {
     //Open Weather API Variables
     const openWeatherKey = 'd4e1e14217e539534a82f3014cd52789';
-    let cityName = 'Dallas';
+    let cityName = 'Salt Lake City';
     let apiURL = (`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherKey}`);
 
     displayDates();
@@ -12,6 +12,7 @@ $(document).ready(function () {
         method: 'GET'
     }).then(function (response) {
         console.log(response);
+        displayWeatherInfo(response);
     });
 
     //Get icon from open weather maps icon url
@@ -46,6 +47,20 @@ $(document).ready(function () {
         }
 
         return iconUrl;
+    }
+
+    function displayWeatherInfo(weatherInfo) {
+        //Location Info
+        $('#city-name').text(weatherInfo.name);
+        $('#country-code').text(weatherInfo.sys.country);
+
+        //Weather Info
+        $('#temperature').text(weatherInfo.main.temp);
+        $('#humidity').text(weatherInfo.main.humidity);
+        $('#wind-speed').text(weatherInfo.wind.speed);
+
+        //Weather Info Icon
+        $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
     }
 
     //Display dates and days of the week for Weather Info and 5 Day Forecast sections
