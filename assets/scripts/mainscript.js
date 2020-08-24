@@ -1,30 +1,73 @@
 $(document).ready(function () {
     //Open Weather API Variables
     const openWeatherKey = 'd4e1e14217e539534a82f3014cd52789';
+    const apiURL = 'https://api.openweathermap.org/data/2.5/';
     let cityName = 'Austin';
 
     displayDates();
 
     //AJAX call Weather Info API
-    let weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${openWeatherKey}`;
+    const weatherURL = `${apiURL}weather?q=${cityName}&appid=${openWeatherKey}`;
     $.ajax({
         url: weatherURL,
         method: 'GET'
     }).then(function (response) {
-        console.log('weather response');
-        console.log(response);
         displayWeatherInfo(response, true);
     });
 
     //AJAX call 5 Day Forecast API
-    let forecastURL = `https://api.openweathermap.org/data/2.5/forecast?q=${cityName}&appid=${openWeatherKey}`;
+    const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${openWeatherKey}`;
     $.ajax({
         url: forecastURL,
         method: 'GET'
     }).then(function (response) {
-        console.log('forecast response');
         console.log(response);
     });
+
+    function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
+        let temperature;
+        let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
+        //Convert temperature to Fahrenheit or Celcius
+        if (useFahrenheit) {
+            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
+        }
+        else {
+            temperature = `${kelvinToCelsius(weatherInfo.main.temp)} C`;
+        }
+
+        //Location Info
+        $('#city-name').text(weatherInfo.name);
+        $('#country-code').text(weatherInfo.sys.country);
+
+        //Weather Info
+        $('#temperature').text(temperature);
+        $('#humidity').text(`${weatherInfo.main.humidity}%`);
+        $('#wind-speed').text(`${windSpeed} mph`);
+
+        //Weather Info Icon
+        $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
+
+        //AJAX call UV Index API
+        const uvIndexURL = `${apiURL}uvi?appid=${openWeatherKey}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
+        $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
+            $('#uv-index').text(response.value);
+        });
+    }
+
+    //Display dates and days of the week for Weather Info and 5 Day Forecast sections
+    function displayDates() {
+        const m = moment();
+        const forecastDOWs = $('.forecast-dow');
+
+        //Set current date in Weather Info section
+        $('#current-date').text(m.format("MM/DD/YYYY"));
+
+        //Set days of the week for 5 Day Forecast section
+        for (let i = 0; i < 5; i++) {
+            m.add(1, 'days');
+            forecastDOWs.eq(i).text(m.format('dddd'));
+        }
+    }
 
     //Get icon from open weather maps icon url
     /*Icons include:
@@ -58,51 +101,6 @@ $(document).ready(function () {
         }
 
         return iconUrl;
-    }
-
-    function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
-        let temperature;
-        let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
-        //Convert temperature to Fahrenheit or Celcius
-        if (useFahrenheit) {
-            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
-        }
-        else {
-            temperature = `${kelvinToCelsius(weatherInfo.main.temp)} C`;
-        }
-
-        //Location Info
-        $('#city-name').text(weatherInfo.name);
-        $('#country-code').text(weatherInfo.sys.country);
-
-        //Weather Info
-        $('#temperature').text(temperature);
-        $('#humidity').text(`${weatherInfo.main.humidity}%`);
-        $('#wind-speed').text(`${windSpeed} mph`);
-
-        //Weather Info Icon
-        $('#weather-info-icon').attr('src', getIconUrl(weatherInfo.weather[0].icon, 'large'));
-
-        //AJAX call UV Index API
-        let uvIndexURL = `http://api.openweathermap.org/data/2.5/uvi?appid=${openWeatherKey}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
-        $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
-            $('#uv-index').text(response.value);
-        });
-    }
-
-    //Display dates and days of the week for Weather Info and 5 Day Forecast sections
-    function displayDates() {
-        const m = moment();
-        const forecastDOWs = $('.forecast-dow');
-
-        //Set current date in Weather Info section
-        $('#current-date').text(m.format("MM/DD/YYYY"));
-
-        //Set days of the week for 5 Day Forecast section
-        for (let i = 0; i < 5; i++) {
-            m.add(1, 'days');
-            forecastDOWs.eq(i).text(m.format('dddd'));
-        }
     }
 
     //Converts Kelvin input to Fahrenheit output
