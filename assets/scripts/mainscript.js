@@ -17,6 +17,8 @@ $(document).ready(function () {
             method: 'GET'
         }).then(function (response) {
             displayWeatherInfo(response, true);
+        }).fail(function () {
+            alert(`Could not find city ${cityName}`);
         });
 
         //AJAX call 5 Day Forecast API
