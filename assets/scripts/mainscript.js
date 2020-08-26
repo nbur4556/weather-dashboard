@@ -4,13 +4,13 @@ $(document).ready(function () {
     let cityName = 'Austin';
 
     displayDates();
-    callWeatherInfo();
+    getWeatherInfoForCity();
 
     //"City Name" search button clicked
     $('#city-search-btn').click(setCityName);
 
     //AJAX call Weather Info API
-    function callWeatherInfo() {
+    function getWeatherInfoForCity() {
         const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
         $.ajax({
             url: weatherURL,
@@ -31,8 +31,8 @@ $(document).ready(function () {
 
     function setCityName(e) {
         e.preventDefault();
-        cityName = "Draper";
-        callWeatherInfo();
+        cityName = $('#city-search-input').val();
+        getWeatherInfoForCity();
     }
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
