@@ -20,7 +20,7 @@ $(document).ready(function () {
         url: forecastURL,
         method: 'GET'
     }).then(function (response) {
-        displayForecastInfo(response);
+        findForecastInfo(response);
     });
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
@@ -53,21 +53,21 @@ $(document).ready(function () {
         });
     }
 
-    function displayForecastInfo(weatherInfo, useFahrenheit = true) {
+    function findForecastInfo(weatherInfo, useFahrenheit = true) {
         let forecastIndex = 0;
         const forecastHigh = $('.forecast-high');
         const forecastLow = $('.forecast-low');
+        const forecastHumidity = $('.forecast-humidity');
 
-        let highTemp = '';
-        let lowTemp = '';
+        let highTemp;
+        let lowTemp;
+        let humidity;
         let currentDate = ''
 
         for (let i = 0; i < weatherInfo.list.length; i++) {
-            console.log(weatherInfo.list[i]);
-
             if (currentDate != weatherInfo.list[i].dt_txt.substring(0, 10)) {
                 if (currentDate != '') {
-                    setForecastInfo();
+                    displayForecastInfo();
                     forecastIndex++;
                 }
                 //Set to new day
@@ -78,21 +78,20 @@ $(document).ready(function () {
             else if (highTemp < weatherInfo.list[i].main.temp) {
                 //Set higher temp
                 highTemp = weatherInfo.list[i].main.temp;
+                humidity = weatherInfo.list[i].main.humidity;
             }
             else if (lowTemp > weatherInfo.list[i].main.temp) {
                 //Set lower temp
                 lowTemp = weatherInfo.list[i].main.temp;
             }
-            console.log(currentDate);
-            console.log(highTemp);
-            console.log(lowTemp);
         }
 
-        setForecastInfo();
+        displayForecastInfo();
 
-        function setForecastInfo() {
+        function displayForecastInfo() {
             forecastHigh.eq(forecastIndex).text(`High: ${highTemp}`);
             forecastLow.eq(forecastIndex).text(`High: ${lowTemp}`);
+            forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
         }
     }
 
