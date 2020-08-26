@@ -20,7 +20,7 @@ $(document).ready(function () {
         url: forecastURL,
         method: 'GET'
     }).then(function (response) {
-        console.log(response);
+        findForecastInfo(response);
     });
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
@@ -51,6 +51,50 @@ $(document).ready(function () {
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
             $('#uv-index').text(response.value);
         });
+    }
+
+    function findForecastInfo(weatherInfo, useFahrenheit = true) {
+        let forecastIndex = 0;
+        const forecastHigh = $('.forecast-high');
+        const forecastLow = $('.forecast-low');
+        const forecastHumidity = $('.forecast-humidity');
+
+        let highTemp;
+        let lowTemp;
+        let humidity;
+        let currentDate = ''
+
+        for (let i = 0; i < weatherInfo.list.length; i++) {
+            if (currentDate != weatherInfo.list[i].dt_txt.substring(0, 10)) {
+                if (currentDate != '') {
+                    displayForecastInfo();
+                    forecastIndex++;
+                }
+                //Set to new day
+                currentDate = weatherInfo.list[i].dt_txt.substring(0, 10);
+                highTemp = weatherInfo.list[i].main.temp;
+                lowTemp = weatherInfo.list[i].main.temp;
+            }
+            else if (highTemp < weatherInfo.list[i].main.temp) {
+                //Set higher temp
+                highTemp = weatherInfo.list[i].main.temp;
+                humidity = weatherInfo.list[i].main.humidity;
+            }
+            else if (lowTemp > weatherInfo.list[i].main.temp) {
+                //Set lower temp
+                lowTemp = weatherInfo.list[i].main.temp;
+            }
+        }
+
+        displayForecastInfo();
+
+        function displayForecastInfo() {
+            highTemp = kelvinToFahrenheit(highTemp);
+            lowTemp = kelvinToFahrenheit(lowTemp);
+            forecastHigh.eq(forecastIndex).text(`High: ${highTemp} F`);
+            forecastLow.eq(forecastIndex).text(`High: ${lowTemp} F`);
+            forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
+        }
     }
 
     //Display dates and days of the week for Weather Info and 5 Day Forecast sections
