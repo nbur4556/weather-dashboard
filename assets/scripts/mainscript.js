@@ -5,6 +5,9 @@ $(document).ready(function () {
 
     displayDates();
 
+    //"City Name" search button clicked
+    $('#city-search-btn').click(setCityName);
+
     //AJAX call Weather Info API
     const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
     $.ajax({
@@ -23,10 +26,14 @@ $(document).ready(function () {
         findForecastInfo(response);
     });
 
+    function setCityName() {
+        alert("Clicked");
+    }
+
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
-        //Convert temperature to Fahrenheit or Celcius
+        //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
             temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
         }
@@ -88,6 +95,7 @@ $(document).ready(function () {
 
         displayForecastInfo();
 
+        //Display all forecast info for 5-day forecast section
         function displayForecastInfo() {
             highTemp = kelvinToFahrenheit(highTemp);
             lowTemp = kelvinToFahrenheit(lowTemp);
