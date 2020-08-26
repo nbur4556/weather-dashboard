@@ -20,7 +20,7 @@ $(document).ready(function () {
         url: forecastURL,
         method: 'GET'
     }).then(function (response) {
-        console.log(response);
+        displayForecastInfo(response);
     });
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
@@ -51,6 +51,15 @@ $(document).ready(function () {
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
             $('#uv-index').text(response.value);
         });
+    }
+
+    function displayForecastInfo(weatherInfo, useFahrenheit = true) {
+        for (let i = 0; i < weatherInfo.list.length; i++) {
+            console.log(weatherInfo.list[i]);
+
+            let currentDate = weatherInfo.list[i].dt_txt.substring(0, 10);
+            console.log(currentDate);
+        }
     }
 
     //Display dates and days of the week for Weather Info and 5 Day Forecast sections
