@@ -89,8 +89,10 @@ $(document).ready(function () {
         displayForecastInfo();
 
         function displayForecastInfo() {
-            forecastHigh.eq(forecastIndex).text(`High: ${highTemp}`);
-            forecastLow.eq(forecastIndex).text(`High: ${lowTemp}`);
+            highTemp = kelvinToFahrenheit(highTemp);
+            lowTemp = kelvinToFahrenheit(lowTemp);
+            forecastHigh.eq(forecastIndex).text(`High: ${highTemp} F`);
+            forecastLow.eq(forecastIndex).text(`High: ${lowTemp} F`);
             forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
         }
     }
