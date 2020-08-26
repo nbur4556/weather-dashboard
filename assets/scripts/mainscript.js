@@ -4,30 +4,35 @@ $(document).ready(function () {
     let cityName = 'Austin';
 
     displayDates();
+    callWeatherInfo();
 
     //"City Name" search button clicked
     $('#city-search-btn').click(setCityName);
 
     //AJAX call Weather Info API
-    const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
-    $.ajax({
-        url: weatherURL,
-        method: 'GET'
-    }).then(function (response) {
-        displayWeatherInfo(response, true);
-    });
+    function callWeatherInfo() {
+        const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
+        $.ajax({
+            url: weatherURL,
+            method: 'GET'
+        }).then(function (response) {
+            displayWeatherInfo(response, true);
+        });
 
-    //AJAX call 5 Day Forecast API
-    const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${config.KEY}`;
-    $.ajax({
-        url: forecastURL,
-        method: 'GET'
-    }).then(function (response) {
-        findForecastInfo(response);
-    });
+        //AJAX call 5 Day Forecast API
+        const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${config.KEY}`;
+        $.ajax({
+            url: forecastURL,
+            method: 'GET'
+        }).then(function (response) {
+            findForecastInfo(response);
+        });
+    }
 
-    function setCityName() {
-        alert("Clicked");
+    function setCityName(e) {
+        e.preventDefault();
+        cityName = "Draper";
+        callWeatherInfo();
     }
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
