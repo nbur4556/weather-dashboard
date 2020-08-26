@@ -54,11 +54,30 @@ $(document).ready(function () {
     }
 
     function displayForecastInfo(weatherInfo, useFahrenheit = true) {
+        let highTemp = '';
+        let lowTemp = '';
+        let currentDate = ''
         for (let i = 0; i < weatherInfo.list.length; i++) {
             console.log(weatherInfo.list[i]);
 
-            let currentDate = weatherInfo.list[i].dt_txt.substring(0, 10);
+            if (currentDate != weatherInfo.list[i].dt_txt.substring(0, 10)) {
+                //Set to new day
+                currentDate = weatherInfo.list[i].dt_txt.substring(0, 10);
+                highTemp = weatherInfo.list[i].main.temp;
+                lowTemp = weatherInfo.list[i].main.temp;
+            }
+            else if (highTemp < weatherInfo.list[i].main.temp) {
+                //Set higher temp
+                highTemp = weatherInfo.list[i].main.temp;
+            }
+            else if (lowTemp > weatherInfo.list[i].main.temp) {
+                //Set lower temp
+                lowTemp = weatherInfo.list[i].main.temp;
+            }
             console.log(currentDate);
+            console.log(highTemp);
+            console.log(lowTemp);
+
         }
     }
 
