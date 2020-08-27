@@ -60,7 +60,6 @@ $(document).ready(function () {
         while (cityHistory.length > maxCityHistory) {
             cityHistory.splice(0, 1);
         }
-        console.log(cityHistory);
 
         //Display and save history
         displayCityHistory();
