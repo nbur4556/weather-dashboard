@@ -43,7 +43,12 @@ $(document).ready(function () {
         const cityHistorySection = $('#city-search-history');
         const cityHistoryItem = $('<li class="dropdown-item">');
 
+        //Create list item and append to cityHistorySection
         cityHistoryItem.text(cityName);
+        cityHistoryItem.click(function () {
+            $('#city-search-input').val(cityHistoryItem.text());
+            setCityName(event);
+        });
         cityHistorySection.prepend(cityHistoryItem);
 
         //Add city name to city history array
