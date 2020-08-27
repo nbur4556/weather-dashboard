@@ -236,6 +236,8 @@ $(document).ready(function () {
     }
 
     function loadCityHistory() {
-        console.log('Load City History');
+        if (localStorage.getItem(storageKey) != null) {
+            cityHistory = JSON.parse(localStorage.getItem(storageKey));
+        }
     }
 });
