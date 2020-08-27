@@ -2,31 +2,64 @@ $(document).ready(function () {
     //Open Weather API Variables
     const apiURL = 'https://api.openweathermap.org/data/2.5/';
     let cityName = 'Austin';
+    let cityHistory = new Array();
 
     displayDates();
+    getWeatherInfoForCity();
+
+    //"City Name" search button clicked
+    $('#city-search-btn').click(setCityName);
 
     //AJAX call Weather Info API
-    const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
-    $.ajax({
-        url: weatherURL,
-        method: 'GET'
-    }).then(function (response) {
-        displayWeatherInfo(response, true);
-    });
+    function getWeatherInfoForCity() {
+        const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
+        $.ajax({
+            url: weatherURL,
+            method: 'GET'
+        }).then(function (response) {
+            displayWeatherInfo(response, true);
+        }).fail(function () {
+            alert(`Could not find city ${cityName}`);
+        });
 
-    //AJAX call 5 Day Forecast API
-    const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${config.KEY}`;
-    $.ajax({
-        url: forecastURL,
-        method: 'GET'
-    }).then(function (response) {
-        findForecastInfo(response);
-    });
+        //AJAX call 5 Day Forecast API
+        const forecastURL = `${apiURL}forecast?q=${cityName}&appid=${config.KEY}`;
+        $.ajax({
+            url: forecastURL,
+            method: 'GET'
+        }).then(function (response) {
+            findForecastInfo(response);
+            setCityHistory();
+        });
+    }
+
+    function setCityName(e) {
+        e.preventDefault();
+        cityName = $('#city-search-input').val();
+        getWeatherInfoForCity();
+    }
+
+    function setCityHistory() {
+        const cityHistorySection = $('#city-search-history');
+        const cityHistoryItem = $('<li class="dropdown-item">');
+
+        //Create list item and append to cityHistorySection
+        cityHistoryItem.text(cityName);
+        cityHistoryItem.click(function () {
+            $('#city-search-input').val(cityHistoryItem.text());
+            setCityName(event);
+        });
+        cityHistorySection.prepend(cityHistoryItem);
+
+        //Add city name to city history array
+        cityHistory.push(cityName);
+        console.log(cityHistory);
+    }
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
-        //Convert temperature to Fahrenheit or Celcius
+        //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
             temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
         }
@@ -88,6 +121,7 @@ $(document).ready(function () {
 
         displayForecastInfo();
 
+        //Display all forecast info for 5-day forecast section
         function displayForecastInfo() {
             highTemp = kelvinToFahrenheit(highTemp);
             lowTemp = kelvinToFahrenheit(lowTemp);
