@@ -111,6 +111,16 @@ $(document).ready(function () {
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
             $('#uv-index').text(response.value);
         });
+
+        setUVIndicator();
+
+        //Sets background color of UV indicator based off uv index value
+        function setUVIndicator() {
+            const uvColors = ['#2ecc71', '#FFC300', '#FF5733', '#C70039', '#900C3F']
+
+
+            $('#uv-indicator').css('background-color', 'green');
+        }
     }
 
     //Loops through all forecast results for high temperature, low temperature, humidity, and icon
@@ -153,7 +163,6 @@ $(document).ready(function () {
         }
 
         displayForecastInfo();
-        setUVIndicator();
 
         //Display all forecast info for 5-day forecast section
         function displayForecastInfo() {
@@ -166,11 +175,6 @@ $(document).ready(function () {
             forecastLow.eq(forecastIndex).text(`${lowTemp}° F`);
             forecastHumidity.eq(forecastIndex).text(`${humidity}%`);
             forecastIcon.eq(forecastIndex).attr('src', getIconUrl(iconId, 'large'));
-        }
-
-        //Sets background color of UV indicator based off uv index value
-        function setUVIndicator() {
-            $('#uv-indicator').css('background-color', 'green');
         }
     }
 
