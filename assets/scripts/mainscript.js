@@ -11,8 +11,8 @@ $(document).ready(function () {
     //"City Name" search button clicked
     $('#city-search-btn').click(setCityName);
 
-    //AJAX call Weather Info API
     function getWeatherInfoForCity() {
+        //AJAX call Weather Info API
         const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
         $.ajax({
             url: weatherURL,
@@ -50,6 +50,8 @@ $(document).ready(function () {
         const cityHistorySection = $('#city-search-history');
         const cityHistoryItem = $('<li class="dropdown-item">');
 
+        checkForDuplicateCityHistory();
+
         //Create list item and append to cityHistorySection
         cityHistoryItem.text(cityName);
         cityHistoryItem.click(function () {
@@ -61,6 +63,14 @@ $(document).ready(function () {
         //Add city name to city history array
         cityHistory.push(cityName);
         console.log(cityHistory);
+    }
+
+    function checkForDuplicateCityHistory() {
+        for (let i = 0; i < cityHistory.length; i++) {
+            if (cityHistory[i] == cityName) {
+                console.log(`Duplicate found at index ${i}`);
+            }
+        }
     }
 
     //Display all weather info for weather section
