@@ -116,15 +116,26 @@ $(document).ready(function () {
             setUVIndicator();
         });
 
-
-
         //Sets background color of UV indicator based off uv index value
         function setUVIndicator() {
-            const uvColors = ['#2ecc71', '#FFC300', '#FF5733', '#C70039', '#900C3F']
+            const uvColors = ['#2ecc71', '#FFC300', '#FF5733', '#C70039', '#900C3F'];
+            const uvIndicator = $('#uv-indicator');
 
-            console.log(uvIndex);
-
-            // $('#uv-indicator').css('background-color', 'green');
+            if (uvIndex < 2) {
+                uvIndicator.css('background-color', uvColors[0]);
+            }
+            else if (uvIndex < 5 && uvIndex >= 2) {
+                uvIndicator.css('background-color', uvColors[1]);
+            }
+            else if (uvIndex < 7 && uvIndex >= 5) {
+                uvIndicator.css('background-color', uvColors[2]);
+            }
+            else if (uvIndex < 11 && uvIndex >= 7) {
+                uvIndicator.css('background-color', uvColors[3]);
+            }
+            else if (uvIndex >= 11) {
+                uvIndicator.css('background-color', uvColors[4]);
+            }
         }
     }
 
