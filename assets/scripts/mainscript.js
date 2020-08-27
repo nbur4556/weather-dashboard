@@ -68,10 +68,15 @@ $(document).ready(function () {
     function checkForDuplicateCityHistory() {
         for (let i = 0; i < cityHistory.length; i++) {
             if (cityHistory[i] == cityName) {
-                console.log(`Duplicate found at index ${i}`);
                 cityHistory.splice(i, 1);
+                setupCityHistorySection();
             }
         }
+    }
+
+    function setupCityHistorySection() {
+        const cityHistorySection = $('#city-search-history');
+        cityHistorySection.empty();
     }
 
     //Display all weather info for weather section
