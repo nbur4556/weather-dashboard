@@ -91,10 +91,12 @@ $(document).ready(function () {
         const forecastHigh = $('.forecast-high');
         const forecastLow = $('.forecast-low');
         const forecastHumidity = $('.forecast-humidity');
+        const forecastIcon = $('.forecast-icon');
 
         let highTemp;
         let lowTemp;
         let humidity;
+        let iconId;
         let currentDate = ''
 
         for (let i = 0; i < weatherInfo.list.length; i++) {
@@ -107,11 +109,14 @@ $(document).ready(function () {
                 currentDate = weatherInfo.list[i].dt_txt.substring(0, 10);
                 highTemp = weatherInfo.list[i].main.temp;
                 lowTemp = weatherInfo.list[i].main.temp;
+                humidity = weatherInfo.list[i].main.humidity;
+                iconId = weatherInfo.list[i].weather[0].icon;
             }
             else if (highTemp < weatherInfo.list[i].main.temp) {
                 //Set higher temp
                 highTemp = weatherInfo.list[i].main.temp;
                 humidity = weatherInfo.list[i].main.humidity;
+                iconId = weatherInfo.list[i].weather[0].icon;
             }
             else if (lowTemp > weatherInfo.list[i].main.temp) {
                 //Set lower temp
@@ -123,11 +128,15 @@ $(document).ready(function () {
 
         //Display all forecast info for 5-day forecast section
         function displayForecastInfo() {
+            //Convert temp to fahrenheit
             highTemp = kelvinToFahrenheit(highTemp);
             lowTemp = kelvinToFahrenheit(lowTemp);
+
+            //Display info to forecast box at forecastIndex
             forecastHigh.eq(forecastIndex).text(`High: ${highTemp} F`);
             forecastLow.eq(forecastIndex).text(`High: ${lowTemp} F`);
             forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
+            forecastIcon.eq(forecastIndex).attr('src', getIconUrl(iconId, 'large'));
         }
     }
 
