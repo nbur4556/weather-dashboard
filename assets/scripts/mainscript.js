@@ -50,11 +50,18 @@ $(document).ready(function () {
 
     //Add successfully searched cities to cityHistory Array
     function setCityHistory() {
-        checkForDuplicateCityHistory();
+        let maxCityHistory = 25;
 
         //Add city name to city history array
+        checkForDuplicateCityHistory();
         cityHistory.push(cityName);
-        console.log(cityHistory);
+
+        //If cityHistory is over max limit, remove the oldest cities in search history until under the limit
+        while (cityHistory.length > maxCityHistory) {
+            cityHistory.splice(0, 1);
+        }
+
+        //Display and save history
         displayCityHistory();
         saveCityHistory();
     }
@@ -231,10 +238,12 @@ $(document).ready(function () {
         }
     }
 
+    //History is saved to local storage
     function saveCityHistory() {
         localStorage.setItem(storageKey, JSON.stringify(cityHistory));
     }
 
+    //History is loaded from local storage
     function loadCityHistory() {
         if (localStorage.getItem(storageKey) != null) {
             cityHistory = JSON.parse(localStorage.getItem(storageKey));
