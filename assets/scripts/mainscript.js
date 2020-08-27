@@ -153,6 +153,7 @@ $(document).ready(function () {
         }
 
         displayForecastInfo();
+        setUVIndicator();
 
         //Display all forecast info for 5-day forecast section
         function displayForecastInfo() {
@@ -165,6 +166,11 @@ $(document).ready(function () {
             forecastLow.eq(forecastIndex).text(`${lowTemp}° F`);
             forecastHumidity.eq(forecastIndex).text(`${humidity}%`);
             forecastIcon.eq(forecastIndex).attr('src', getIconUrl(iconId, 'large'));
+        }
+
+        //Sets background color of UV indicator based off uv index value
+        function setUVIndicator() {
+            $('#uv-indicator').css('background-color', 'green');
         }
     }
 
