@@ -45,38 +45,37 @@ $(document).ready(function () {
         getWeatherInfoForCity();
     }
 
+    function setupCityHistorySection() {
+        const cityHistorySection = $('#city-search-history');
+        cityHistorySection.empty();
+
+        for (let i = 0; i < cityHistory.length; i++) {
+            let cityHistoryItem = $('<li class="dropdown-item">');
+            cityHistoryItem.text(cityHistory[i]);
+            cityHistoryItem.click(function () {
+                $('#city-search-input').val(cityHistoryItem.text());
+                setCityName(event);
+            });
+            cityHistorySection.prepend(cityHistoryItem);
+        }
+    }
+
     //Add successfully searched cities to city history section
     function setCityHistory() {
-        const cityHistorySection = $('#city-search-history');
-        const cityHistoryItem = $('<li class="dropdown-item">');
-
         checkForDuplicateCityHistory();
-
-        //Create list item and append to cityHistorySection
-        cityHistoryItem.text(cityName);
-        cityHistoryItem.click(function () {
-            $('#city-search-input').val(cityHistoryItem.text());
-            setCityName(event);
-        });
-        cityHistorySection.prepend(cityHistoryItem);
 
         //Add city name to city history array
         cityHistory.push(cityName);
         console.log(cityHistory);
+        setupCityHistorySection();
     }
 
     function checkForDuplicateCityHistory() {
         for (let i = 0; i < cityHistory.length; i++) {
             if (cityHistory[i] == cityName) {
                 cityHistory.splice(i, 1);
-                setupCityHistorySection();
             }
         }
-    }
-
-    function setupCityHistorySection() {
-        const cityHistorySection = $('#city-search-history');
-        cityHistorySection.empty();
     }
 
     //Display all weather info for weather section
