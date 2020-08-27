@@ -85,7 +85,9 @@ $(document).ready(function () {
     //Display all weather info for weather section
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
+        let uvIndex;
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
+
         //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
             temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)}° F`;
@@ -109,17 +111,20 @@ $(document).ready(function () {
         //AJAX call UV Index API
         const uvIndexURL = `${apiURL}uvi?appid=${config.KEY}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
-            $('#uv-index').text(response.value);
+            uvIndex = response.value;
+            $('#uv-index').text(uvIndex);
+            setUVIndicator();
         });
 
-        setUVIndicator();
+
 
         //Sets background color of UV indicator based off uv index value
         function setUVIndicator() {
             const uvColors = ['#2ecc71', '#FFC300', '#FF5733', '#C70039', '#900C3F']
 
+            console.log(uvIndex);
 
-            $('#uv-indicator').css('background-color', 'green');
+            // $('#uv-indicator').css('background-color', 'green');
         }
     }
 
