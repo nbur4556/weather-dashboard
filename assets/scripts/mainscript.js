@@ -161,9 +161,9 @@ $(document).ready(function () {
             lowTemp = kelvinToFahrenheit(lowTemp);
 
             //Display info to forecast box at forecastIndex
-            forecastHigh.eq(forecastIndex).text(`High: ${highTemp} F`);
-            forecastLow.eq(forecastIndex).text(`High: ${lowTemp} F`);
-            forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
+            forecastHigh.eq(forecastIndex).text(`${highTemp}° F`);
+            forecastLow.eq(forecastIndex).text(`${lowTemp}° F`);
+            forecastHumidity.eq(forecastIndex).text(`${humidity}%`);
             forecastIcon.eq(forecastIndex).attr('src', getIconUrl(iconId, 'large'));
         }
     }
