@@ -85,7 +85,9 @@ $(document).ready(function () {
     //Display all weather info for weather section
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
+        let uvIndex;
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
+
         //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
             temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)}° F`;
@@ -109,8 +111,32 @@ $(document).ready(function () {
         //AJAX call UV Index API
         const uvIndexURL = `${apiURL}uvi?appid=${config.KEY}&lat=${weatherInfo.coord.lat}&lon=${weatherInfo.coord.lon}`;
         $.ajax({ url: uvIndexURL, method: 'GET' }).then(function (response) {
-            $('#uv-index').text(response.value);
+            uvIndex = response.value;
+            $('#uv-index').text(uvIndex);
+            setUVIndicator();
         });
+
+        //Sets background color of UV indicator based off uv index value
+        function setUVIndicator() {
+            const uvColors = ['#2ecc71', '#FFC300', '#FF5733', '#C70039', '#900C3F'];
+            const uvIndicator = $('#uv-indicator');
+
+            if (uvIndex < 2) {
+                uvIndicator.css('background-color', uvColors[0]);
+            }
+            else if (uvIndex < 5 && uvIndex >= 2) {
+                uvIndicator.css('background-color', uvColors[1]);
+            }
+            else if (uvIndex < 7 && uvIndex >= 5) {
+                uvIndicator.css('background-color', uvColors[2]);
+            }
+            else if (uvIndex < 11 && uvIndex >= 7) {
+                uvIndicator.css('background-color', uvColors[3]);
+            }
+            else if (uvIndex >= 11) {
+                uvIndicator.css('background-color', uvColors[4]);
+            }
+        }
     }
 
     //Loops through all forecast results for high temperature, low temperature, humidity, and icon
