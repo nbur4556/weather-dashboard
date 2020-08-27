@@ -1,11 +1,13 @@
 $(document).ready(function () {
     //Open Weather API Variables
     const apiURL = 'https://api.openweathermap.org/data/2.5/';
+    const storageKey = 'city-history'
     let cityName = 'Austin';
     let cityHistory = new Array();
 
     //Initialize
     displayDates();
+    loadCityHistory();
     displayCityHistory();
     getWeatherInfoForCity();
 
@@ -54,6 +56,7 @@ $(document).ready(function () {
         cityHistory.push(cityName);
         console.log(cityHistory);
         displayCityHistory();
+        saveCityHistory();
     }
 
     //Display cityHistory array to the city history section
@@ -226,5 +229,13 @@ $(document).ready(function () {
                 cityHistory.splice(i, 1);
             }
         }
+    }
+
+    function saveCityHistory() {
+        console.log('Save City History');
+    }
+
+    function loadCityHistory() {
+        console.log('Load City History');
     }
 });
