@@ -232,7 +232,7 @@ $(document).ready(function () {
     }
 
     function saveCityHistory() {
-        console.log('Save City History');
+        localStorage.setItem(storageKey, JSON.stringify(cityHistory));
     }
 
     function loadCityHistory() {
