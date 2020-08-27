@@ -2,3 +2,10 @@ body{
     /* Hide overflow from search history */
     overflow: hidden;
 }
+
+#weather-info-icon{
+    position: relative;
+    top: -20px;
+    left: -50px;
+    height: 20vw;
+}

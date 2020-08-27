@@ -25,7 +25,7 @@
             <form class='nav-item dropdown'>
                 <div class='input-group'>
                     <input id='city-search-input' class='form-control nav-link dropdown-toggle' type='text'
-                        placeholder='City Name' data-toggle='dropdown' />
+                        placeholder='City Name' data-toggle='dropdown' autocomplete='off' />
 
                     <!-- Search Icon -->
                     <div class='input-group-append'>
@@ -52,32 +52,35 @@
 
             <!-- Weather Info Section -->
             <section class='mt-2 mb-2'>
-                <div class='card card-body mx-2'>
+                <div class='card card-body mx-2 pt-5'>
 
                     <!-- Title and Icon Section -->
                     <div class='row'>
-                        <div class='col-md-6'>
-                            <h5 class='card-title mb-5'>
-                                <span id='city-name'></span>, <span id='country-code'></span>
-                                <span id='current-date'></span>
-                            </h5>
+                        <div class='col-md-4'>
+                            <h3 class='card-title mb-5'>
+                                <span id='city-name' class='font-weight-bold'></span>, <span id='country-code'></span>
+                                <span id='current-date' class='text-secondary pl-2' style='font-size: 80%'></span>
+                            </h3>
 
                             <!-- Information Section -->
                             <section class='row'>
-                                <div class='col-md-6'>
-                                    <p class='card-text'>Temperature: <span id='temperature'></span></p>
-                                    <p class='card-text'>Humidity: <span id='humidity'></span></p>
-                                </div>
-                                <div class='col-md-6'>
-                                    <p class='card-text'>Wind Speed: <span id='wind-speed'></span></p>
-                                    <p class='card-text'>UV Index: <span id='uv-index'></span></p>
+                                <div class='col-md-12'>
+                                    <p class='card-text font-weight-bold'>Humidity: <span id='humidity'
+                                            class='font-weight-normal'></span></p>
+                                    <p class='card-text font-weight-bold'>Wind Speed: <span id='wind-speed'
+                                            class='font-weight-normal'></span></p>
+                                    <p class='card-text font-weight-bold'>UV Index: <span id='uv-index'
+                                            class='font-weight-normal'></span></p>
                                 </div>
                             </section>
 
                         </div>
                         <!-- Weather Icon Image -->
-                        <div class='col-md-2'>
+                        <div class='col-md-2 '>
                             <img id='weather-info-icon' />
+                        </div>
+                        <div class='col-md-2 mt-5'>
+                            <h1 class='card-subtitle font-weight-bold text-primary'><span id='temperature'></span></h1>
                         </div>
                     </div>
 
@@ -87,44 +90,59 @@
             <!-- 5 Day Forecast Section -->
             <section class='d-flex justify-content-between'>
                 <!-- Forecast Day -->
-                <section class='card card-body mx-2'>
-                    <h5 class='forecast-dow card-title'></h5>
+                <section class='card card-body mx-2 py-5'>
+                    <h5 class='forecast-dow card-title font-weight-bold'></h5>
                     <img class='forecast-icon card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
-                    <p class='forecast-high card-text'>High:</p>
-                    <p class='forecast-low card-text'>Low:</p>
-                    <p class='forecast-humidity card-text'>Humidity:</p>
+                    <p class='card-text text-center'>
+                        <span class='forecast-high font-weight-bold text-primary px-2'></span>
+                        <span class='forecast-low font-weight-bold text-secondary px-2'></span>
+                    </p>
+                    <p class='card-text font-weight-bold text-center'>Humidity:
+                        <span class='forecast-humidity font-weight-normal'></span></p>
                 </section>
                 <!-- Forecast Day -->
-                <section class='card card-body mx-2'>
-                    <h5 class='forecast-dow card-title'></h5>
+                <section class='card card-body mx-2 py-5'>
+                    <h5 class='forecast-dow card-title font-weight-bold'></h5>
                     <img class='forecast-icon card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
-                    <p class='forecast-high card-text'>High:</p>
-                    <p class='forecast-low card-text'>Low:</p>
-                    <p class='forecast-humidity card-text'>Humidity:</p>
+                    <p class='card-text text-center'>
+                        <span class='forecast-high font-weight-bold text-primary px-2'></span>
+                        <span class='forecast-low font-weight-bold text-secondary px-2'></span>
+                    </p>
+                    <p class='card-text font-weight-bold text-center'>Humidity:
+                        <span class='forecast-humidity font-weight-normal'></span></p>
                 </section>
                 <!-- Forecast Day -->
-                <section class='card card-body mx-2'>
-                    <h5 class='forecast-dow card-title'></h5>
+                <section class='card card-body mx-2 py-5'>
+                    <h5 class='forecast-dow card-title font-weight-bold'></h5>
                     <img class='forecast-icon card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
-                    <p class='forecast-high card-text'>High:</p>
-                    <p class='forecast-low card-text'>Low:</p>
-                    <p class='forecast-humidity card-text'>Humidity:</p>
+                    <p class='card-text text-center'>
+                        <span class='forecast-high font-weight-bold text-primary px-2'></span>
+                        <span class='forecast-low font-weight-bold text-secondary px-2'></span>
+                    </p>
+                    <p class='card-text font-weight-bold text-center'>Humidity:
+                        <span class='forecast-humidity font-weight-normal'></span></p>
                 </section>
                 <!-- Forecast Day -->
-                <section class='card card-body mx-2'>
-                    <h5 class='forecast-dow card-title'></h5>
+                <section class='card card-body mx-2 py-5'>
+                    <h5 class='forecast-dow card-title font-weight-bold'></h5>
                     <img class='forecast-icon card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
-                    <p class='forecast-high card-text'>High:</p>
-                    <p class='forecast-low card-text'>Low:</p>
-                    <p class='forecast-humidity card-text'>Humidity:</p>
+                    <p class='card-text text-center'>
+                        <span class='forecast-high font-weight-bold text-primary px-2'></span>
+                        <span class='forecast-low font-weight-bold text-secondary px-2'></span>
+                    </p>
+                    <p class='card-text font-weight-bold text-center'>Humidity:
+                        <span class='forecast-humidity font-weight-normal'></span></p>
                 </section>
                 <!-- Forecast Day -->
-                <section class='card card-body mx-2'>
-                    <h5 class='forecast-dow card-title'></h5>
+                <section class='card card-body mx-2 py-5'>
+                    <h5 class='forecast-dow card-title font-weight-bold'></h5>
                     <img class='forecast-icon card-img' src='http://openweathermap.org/img/wn/02d@4x.png' />
-                    <p class='forecast-high card-text'>High:</p>
-                    <p class='forecast-low card-text'>Low:</p>
-                    <p class='forecast-humidity card-text'>Humidity:</p>
+                    <p class='card-text text-center'>
+                        <span class='forecast-high font-weight-bold text-primary px-2'></span>
+                        <span class='forecast-low font-weight-bold text-secondary px-2'></span>
+                    </p>
+                    <p class='card-text font-weight-bold text-center'>Humidity:
+                        <span class='forecast-humidity font-weight-normal'></span></p>
                 </section>
             </section>
 

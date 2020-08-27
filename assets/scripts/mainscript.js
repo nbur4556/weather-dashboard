@@ -88,10 +88,10 @@ $(document).ready(function () {
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
         //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
-            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
+            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)}° F`;
         }
         else {
-            temperature = `${kelvinToCelsius(weatherInfo.main.temp)} C`;
+            temperature = `${kelvinToCelsius(weatherInfo.main.temp)}° C`;
         }
 
         //Location Info
@@ -161,9 +161,9 @@ $(document).ready(function () {
             lowTemp = kelvinToFahrenheit(lowTemp);
 
             //Display info to forecast box at forecastIndex
-            forecastHigh.eq(forecastIndex).text(`High: ${highTemp} F`);
-            forecastLow.eq(forecastIndex).text(`High: ${lowTemp} F`);
-            forecastHumidity.eq(forecastIndex).text(`Humidity: ${humidity}%`);
+            forecastHigh.eq(forecastIndex).text(`${highTemp}° F`);
+            forecastLow.eq(forecastIndex).text(`${lowTemp}° F`);
+            forecastHumidity.eq(forecastIndex).text(`${humidity}%`);
             forecastIcon.eq(forecastIndex).attr('src', getIconUrl(iconId, 'large'));
         }
     }
