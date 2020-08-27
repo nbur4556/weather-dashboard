@@ -88,10 +88,10 @@ $(document).ready(function () {
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
         //Convert temperature to Fahrenheit or Celsius
         if (useFahrenheit) {
-            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)} F`;
+            temperature = `${kelvinToFahrenheit(weatherInfo.main.temp)}° F`;
         }
         else {
-            temperature = `${kelvinToCelsius(weatherInfo.main.temp)} C`;
+            temperature = `${kelvinToCelsius(weatherInfo.main.temp)}° C`;
         }
 
         //Location Info
