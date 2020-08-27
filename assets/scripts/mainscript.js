@@ -29,6 +29,8 @@ $(document).ready(function () {
             method: 'GET'
         }).then(function (response) {
             findForecastInfo(response);
+            console.log(response);
+            cityName = response.city.name;
             setCityHistory();
         });
     }
