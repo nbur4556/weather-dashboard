@@ -4,6 +4,7 @@ $(document).ready(function () {
     let cityName = 'Austin';
     let cityHistory = new Array();
 
+    //Initialize
     displayDates();
     getWeatherInfoForCity();
 
@@ -30,17 +31,21 @@ $(document).ready(function () {
         }).then(function (response) {
             findForecastInfo(response);
             console.log(response);
+
+            //Add city to history if successfully and use city name from API call for formatting
             cityName = response.city.name;
             setCityHistory();
         });
     }
 
+    //Sets city name from search input, and reloads getWeatherInfoForCity() function
     function setCityName(e) {
         e.preventDefault();
         cityName = $('#city-search-input').val();
         getWeatherInfoForCity();
     }
 
+    //Add successfully searched cities to city history section
     function setCityHistory() {
         const cityHistorySection = $('#city-search-history');
         const cityHistoryItem = $('<li class="dropdown-item">');
@@ -58,6 +63,7 @@ $(document).ready(function () {
         console.log(cityHistory);
     }
 
+    //Display all weather info for weather section
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
         let temperature;
         let windSpeed = Math.floor(weatherInfo.wind.speed * 2.237);
@@ -88,6 +94,7 @@ $(document).ready(function () {
         });
     }
 
+    //Loops through all forecast results for high temperature, low temperature, humidity, and icon
     function findForecastInfo(weatherInfo, useFahrenheit = true) {
         let forecastIndex = 0;
         const forecastHigh = $('.forecast-high');
