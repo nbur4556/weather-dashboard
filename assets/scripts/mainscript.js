@@ -6,6 +6,7 @@ $(document).ready(function () {
 
     //Initialize
     displayDates();
+    displayCityHistory();
     getWeatherInfoForCity();
 
     //"City Name" search button clicked
@@ -45,7 +46,18 @@ $(document).ready(function () {
         getWeatherInfoForCity();
     }
 
-    function setupCityHistorySection() {
+    //Add successfully searched cities to cityHistory Array
+    function setCityHistory() {
+        checkForDuplicateCityHistory();
+
+        //Add city name to city history array
+        cityHistory.push(cityName);
+        console.log(cityHistory);
+        displayCityHistory();
+    }
+
+    //Display cityHistory array to the city history section
+    function displayCityHistory() {
         const cityHistorySection = $('#city-search-history');
         cityHistorySection.empty();
 
@@ -57,24 +69,6 @@ $(document).ready(function () {
                 setCityName(event);
             });
             cityHistorySection.prepend(cityHistoryItem);
-        }
-    }
-
-    //Add successfully searched cities to city history section
-    function setCityHistory() {
-        checkForDuplicateCityHistory();
-
-        //Add city name to city history array
-        cityHistory.push(cityName);
-        console.log(cityHistory);
-        setupCityHistorySection();
-    }
-
-    function checkForDuplicateCityHistory() {
-        for (let i = 0; i < cityHistory.length; i++) {
-            if (cityHistory[i] == cityName) {
-                cityHistory.splice(i, 1);
-            }
         }
     }
 
@@ -223,5 +217,14 @@ $(document).ready(function () {
     function kelvinToCelsius(kel) {
         let cel = (kel - 273.15);
         return Math.floor(cel);
+    }
+
+    //Check for duplicate cities in cityHistory array, and remove if found
+    function checkForDuplicateCityHistory() {
+        for (let i = 0; i < cityHistory.length; i++) {
+            if (cityHistory[i] == cityName) {
+                cityHistory.splice(i, 1);
+            }
+        }
     }
 });
