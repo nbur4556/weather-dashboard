@@ -238,6 +238,7 @@ $(document).ready(function () {
     function loadCityHistory() {
         if (localStorage.getItem(storageKey) != null) {
             cityHistory = JSON.parse(localStorage.getItem(storageKey));
+            cityName = cityHistory[cityHistory.length - 1];
         }
     }
 });
