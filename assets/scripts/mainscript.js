@@ -6,13 +6,14 @@ $(document).ready(function () {
 
     //Initialize
     displayDates();
+    displayCityHistory();
     getWeatherInfoForCity();
 
     //"City Name" search button clicked
     $('#city-search-btn').click(setCityName);
 
-    //AJAX call Weather Info API
     function getWeatherInfoForCity() {
+        //AJAX call Weather Info API
         const weatherURL = `${apiURL}weather?q=${cityName}&appid=${config.KEY}`;
         $.ajax({
             url: weatherURL,
@@ -45,22 +46,30 @@ $(document).ready(function () {
         getWeatherInfoForCity();
     }
 
-    //Add successfully searched cities to city history section
+    //Add successfully searched cities to cityHistory Array
     function setCityHistory() {
-        const cityHistorySection = $('#city-search-history');
-        const cityHistoryItem = $('<li class="dropdown-item">');
-
-        //Create list item and append to cityHistorySection
-        cityHistoryItem.text(cityName);
-        cityHistoryItem.click(function () {
-            $('#city-search-input').val(cityHistoryItem.text());
-            setCityName(event);
-        });
-        cityHistorySection.prepend(cityHistoryItem);
+        checkForDuplicateCityHistory();
 
         //Add city name to city history array
         cityHistory.push(cityName);
         console.log(cityHistory);
+        displayCityHistory();
+    }
+
+    //Display cityHistory array to the city history section
+    function displayCityHistory() {
+        const cityHistorySection = $('#city-search-history');
+        cityHistorySection.empty();
+
+        for (let i = 0; i < cityHistory.length; i++) {
+            let cityHistoryItem = $('<li class="dropdown-item">');
+            cityHistoryItem.text(cityHistory[i]);
+            cityHistoryItem.click(function () {
+                $('#city-search-input').val(cityHistoryItem.text());
+                setCityName(event);
+            });
+            cityHistorySection.prepend(cityHistoryItem);
+        }
     }
 
     //Display all weather info for weather section
@@ -208,5 +217,14 @@ $(document).ready(function () {
     function kelvinToCelsius(kel) {
         let cel = (kel - 273.15);
         return Math.floor(cel);
+    }
+
+    //Check for duplicate cities in cityHistory array, and remove if found
+    function checkForDuplicateCityHistory() {
+        for (let i = 0; i < cityHistory.length; i++) {
+            if (cityHistory[i] == cityName) {
+                cityHistory.splice(i, 1);
+            }
+        }
     }
 });
