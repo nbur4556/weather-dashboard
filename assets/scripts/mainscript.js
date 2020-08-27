@@ -40,6 +40,13 @@ $(document).ready(function () {
     }
 
     function setCityHistory() {
+        const cityHistorySection = $('#city-search-history');
+        const cityHistoryItem = $('<li class="dropdown-item">');
+
+        cityHistoryItem.text(cityName);
+        cityHistorySection.prepend(cityHistoryItem);
+
+        //Add city name to city history array
         cityHistory.push(cityName);
         console.log(cityHistory);
     }
