@@ -69,6 +69,7 @@ $(document).ready(function () {
         for (let i = 0; i < cityHistory.length; i++) {
             if (cityHistory[i] == cityName) {
                 console.log(`Duplicate found at index ${i}`);
+                cityHistory.splice(i, 1);
             }
         }
     }
