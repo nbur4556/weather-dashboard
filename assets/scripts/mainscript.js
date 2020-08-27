@@ -2,6 +2,7 @@ $(document).ready(function () {
     //Open Weather API Variables
     const apiURL = 'https://api.openweathermap.org/data/2.5/';
     let cityName = 'Austin';
+    let cityHistory = new Array();
 
     displayDates();
     getWeatherInfoForCity();
@@ -35,6 +36,12 @@ $(document).ready(function () {
         e.preventDefault();
         cityName = $('#city-search-input').val();
         getWeatherInfoForCity();
+        setCityHistory();
+    }
+
+    function setCityHistory() {
+        cityHistory.push(cityName);
+        console.log(cityHistory);
     }
 
     function displayWeatherInfo(weatherInfo, useFahrenheit = true) {
