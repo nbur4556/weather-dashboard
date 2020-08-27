@@ -29,6 +29,7 @@ $(document).ready(function () {
             method: 'GET'
         }).then(function (response) {
             findForecastInfo(response);
+            setCityHistory();
         });
     }
 
@@ -36,7 +37,6 @@ $(document).ready(function () {
         e.preventDefault();
         cityName = $('#city-search-input').val();
         getWeatherInfoForCity();
-        setCityHistory();
     }
 
     function setCityHistory() {
